@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday My Sweet Love! 💕</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #ffe0f0 25%, #ffd6eb 50%, #ffcce5 75%, #ffc2df 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Cute floating stickers */
+        .floating-stickers {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .sticker {
+            position: absolute;
+            font-size: 2rem;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .sticker:nth-child(odd) {
+            animation-direction: reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .title {
+            font-size: 3rem;
+            color: #e91e63;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(233, 30, 99, 0.3);
+            font-weight: bold;
+            position: relative;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #ad1457;
+            margin-bottom: 3rem;
+            font-style: italic;
+        }
+
+        .gift-container {
+            position: relative;
+            display: inline-block;
+            margin: 2rem 0;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gift-container:hover {
+            transform: scale(1.08);
+        }
+
+        .gift-box {
+            width: 220px;
+            height: 220px;
+            background: linear-gradient(45deg, #ff6b9d, #ff8fab, #ffa8c5);
+            border-radius: 25px;
+            position: relative;
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.4);
+            transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border: 3px solid #fff;
+        }
+
+        .gift-lid {
+            width: 250px;
+            height: 70px;
+            background: linear-gradient(45deg, #e91e63, #f06292, #f48fb1);
+            border-radius: 25px 25px 15px 15px;
+            position: absolute;
+            top: -25px;
+            left: -15px;
+            box-shadow: 0 8px 20px rgba(233, 30, 99, 0.4);
+            transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transform-origin: bottom center;
+            border: 3px solid #fff;
+        }
+
+        .ribbon-vertical {
+            width: 25px;
+            height: 270px;
+            background: linear-gradient(to right, #fff, #f8f9fa, #fff);
+            position: absolute;
+            left: 50%;
+            top: -25px;
+            transform: translateX(-50%);
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15);
+            border-radius: 5px;
+        }
+
+        .ribbon-horizontal {
+            width: 270px;
+            height: 25px;
+            background: linear-gradient(to bottom, #fff, #f8f9fa, #fff);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15);
+            border-radius: 5px;
+        }
+
+        .bow {
+            width: 50px;
+            height: 40px;
+            background: linear-gradient(45deg, #fff, #f8f9fa);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: absolute;
+            top: -45px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 2px solid #e91e63;
+        }
+
+        .bow::before {
+            content: '';
+            width: 25px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid #e91e63;
+        }
+
+        .gift-opened .gift-lid {
+            transform: rotateX(-130deg) translateY(-30px);
+        }
+
+        .gift-opened .gift-box {
+            background: linear-gradient(45deg, #fff5f8, #ffe8f1, #ffeef8);
+            border: 3px solid #ff6b9d;
+        }
+
+        .surprise-content {
+            opacity: 0;
+            transform: translateY(60px) scale(0.7);
+            transition: all 1.2s ease 0.6s;
+            margin-top: 4rem;
+        }
+
+        .gift-opened ~ .surprise-content {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .romantic-message {
+            background: linear-gradient(135deg, #fff, #ffeef8, #ffe8f1);
+            padding: 2.5rem;
+            border-radius: 30px;
+            box-shadow: 0 15px 40px rgba(255, 182, 193, 0.3);
+            margin: 2rem 0;
+            border: 3px solid #ffb6c1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .romantic-message::before {
+            content: '💕';
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        .romantic-message::after {
+            content: '🎀';
+            position: absolute;
+            bottom: 15px;
+            left: 20px;
+            font-size: 2rem;
+            animation: pulse 2s infinite 1s;
+        }
+
+        .romantic-message h2 {
+            color: #e91e63;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .romantic-message p {
+            color: #6c757d;
+            font-size: 1.3rem;
+            line-height: 1.7;
+            margin-bottom: 1.2rem;
+        }
+
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .photo-card {
+            background: linear-gradient(135deg, #fff, #ffeef8);
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.25);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            border: 3px solid #ffb6c1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-8px) rotate(1deg);
+            box-shadow: 0 20px 45px rgba(255, 182, 193, 0.4);
+        }
+
+        .photo-card::before {
+            content: attr(data-sticker);
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            z-index: 5;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, #ffeef8, #ffe0f0, #ffd6eb);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin-bottom: 1.2rem;
+            border: 2px dashed #ff6b9d;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-placeholder::after {
+            content: '✨';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 1.5rem;
+            animation: twinkle 2s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .photo-caption {
+            color: #e91e63;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .hearts-explosion {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .heart-particle {
+            position: absolute;
+            font-size: 2rem;
+            animation: explode 3s ease-out infinite;
+            opacity: 0;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: translateY(50vh) scale(0);
+                opacity: 1;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-20vh) scale(1) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .click-hint {
+            color: #e91e63;
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+            animation: bounce 2s infinite;
+            font-weight: bold;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Decorative corner stickers */
+        .corner-sticker {
+            position: fixed;
+            font-size: 3rem;
+            z-index: 5;
+            animation: gentle-float 4s ease-in-out infinite;
+        }
+
+        .corner-sticker.top-left { top: 20px; left: 20px; }
+        .corner-sticker.top-right { top: 20px; right: 20px; }
+        .corner-sticker.bottom-left { bottom: 20px; left: 20px; }
+        .corner-sticker.bottom-right { bottom: 20px; right: 20px; }
+
+        @keyframes gentle-float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(3deg); }
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .gift-box {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .gift-lid {
+                width: 200px;
+                height: 60px;
+                top: -20px;
+                left: -10px;
+            }
+            
+            .ribbon-vertical {
+                height: 220px;
+                top: -20px;
+            }
+            
+            .ribbon-horizontal {
+                width: 220px;
+            }
+            
+            .romantic-message {
+                padding: 2rem;
+            }
+            
+            .romantic-message h2 {
+                font-size: 1.8rem;
+            }
+            
+            .romantic-message p {
+                font-size: 1.1rem;
+            }
+            
+            .photo-gallery {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .corner-sticker {
+                font-size: 2rem;
+            }
+            
+            .sticker {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating background stickers -->
+    <div class="floating-stickers" id="floatingStickers"></div>
+    
+    <!-- Corner decorative stickers -->
+    <div class="corner-sticker top-left">🎈</div>
+    <div class="corner-sticker top-right">🌟</div>
+    <div class="corner-sticker bottom-left">🎀</div>
+    <div class="corner-sticker bottom-right">🎊</div>
+    
+    <!-- Hearts explosion container -->
+    <div class="hearts-explosion" id="heartsExplosion"></div>
+    
+    <div class="container">
+        <h1 class="title">Happy Birthday My Sweet Love! 💖</h1>
+        <p class="subtitle">The most special day for em iu - terak</p>
+        
+        <div class="gift-container" id="giftContainer">
+            <div class="gift-box" id="giftBox">
+                <div class="ribbon-vertical"></div>
+                <div class="ribbon-horizontal"></div>
+            </div>
+            <div class="gift-lid" id="giftLid">
+                <div class="bow"></div>
+            </div>
+        </div>
+        
+        <div class="click-hint" id="clickHint">Click the gift to unwrap your surprise! 🎁✨</div>
+        
+        <div class="surprise-content" id="surpriseContent">
+            <div class="romantic-message">
+                <h2>To My Beautiful Angle</h2>
+                <p>Happy birthday to the most amazing person in my world! Every single day with you feels like a fairy tale come true. </p>
+                <p>You light up my life with your beautiful smile, your infectious laugh, and your incredible heart. You make even the simplest moments feel magical! </p>
+                <p>Thank you for being my partner in all of life's adventures, my biggest supporter, and my favorite person to be silly with. </p>
+                <p>I can't wait to celebrate many more birthdays together and create countless more beautiful memories! </p>
+                <p><strong>I love you to the moon and back, my darling! 🌙💫</strong></p>
+            </div>
+            
+            <div class="photo-gallery">
+                <div class="photo-card" data-sticker="💕">
+                    <div class="photo-placeholder"> <img src="em.jpg" width="100%" alt=""></div>
+                    <div class="photo-caption">My litle angel</div>
+                </div>
+                <div class="photo-card" data-sticker="🌟">
+                    <div class="photo-placeholder"><img src="emngich.jpg" width="100%" alt=""></div>
+                    <div class="photo-caption">The girl with an adorable face</div>
+                </div>
+                <div class="photo-card" data-sticker="🎈">
+                    <div class="photo-placeholder"><img src="em2.JPG" width="100%" alt=""></div>
+                    <div class="photo-caption">The princess’s smile</div>
+                </div>
+                <div class="photo-card" data-sticker="🎀">
+                    <div class="photo-placeholder"><img src="em1.JPG" width="100%" alt=""></div>
+                    <div class="photo-caption">My pretty baby</div>
+                </div>
+                <div class="photo-card" data-sticker="✨">
+                    <div class="photo-placeholder"><img src="us.jpeg" width="100%" alt=""></div>
+                    <div class="photo-caption">Celebrating Life Together</div>
+                </div>
+                <div class="photo-card" data-sticker="💫">
+                    <div class="photo-placeholder"><img src="slay.jpeg" width="100%" alt=""></div>
+                    <div class="photo-caption">My Favorite Person Ever</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const giftContainer = document.getElementById('giftContainer');
+        const clickHint = document.getElementById('clickHint');
+        const heartsExplosion = document.getElementById('heartsExplosion');
+        const floatingStickers = document.getElementById('floatingStickers');
+        let isOpened = false;
+
+        // Create floating background stickers
+        function createFloatingStickers() {
+            const stickers = ['💕', '💖', '💗', '💘', '🌟', '✨', '🎈', '🎀', '🌸', '🦋', '🌈', '💫'];
+            
+            for (let i = 0; i < 20; i++) {
+                const sticker = document.createElement('div');
+                sticker.className = 'sticker';
+                sticker.innerHTML = stickers[Math.floor(Math.random() * stickers.length)];
+                sticker.style.left = Math.random() * 100 + '%';
+                sticker.style.top = Math.random() * 100 + '%';
+                sticker.style.animationDelay = Math.random() * 6 + 's';
+                sticker.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                floatingStickers.appendChild(sticker);
+            }
+        }
+
+        // Gift box click handler
+        giftContainer.addEventListener('click', function() {
+            if (!isOpened) {
+                giftContainer.classList.add('gift-opened');
+                clickHint.style.display = 'none';
+                isOpened = true;
+                
+                // Create hearts explosion
+                createHeartsExplosion();
+                
+                // Add more floating stickers
+                setTimeout(() => {
+                    createCelebrationStickers();
+                }, 800);
+            }
+        });
+
+        function createHeartsExplosion() {
+            const hearts = ['💕', '💖', '💗', '💘', '❤️', '💝'];
+            
+            for (let i = 0; i < 25; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart-particle';
+                    heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+                    heart.style.left = (45 + Math.random() * 10) + '%';
+                    heart.style.animationDelay = Math.random() * 0.5 + 's';
+                    heart.style.animationDuration = (Math.random() * 1 + 2.5) + 's';
+                    heartsExplosion.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 4000);
+                }, i * 100);
+            }
+        }
+
+        function createCelebrationStickers() {
+            const celebrationStickers = ['🎊', '🎉', '🌟', '✨', '🎈', '🎀', '🌸', '🦋'];
+            
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const sticker = document.createElement('div');
+                    sticker.className = 'heart-particle';
+                    sticker.innerHTML = celebrationStickers[Math.floor(Math.random() * celebrationStickers.length)];
+                    sticker.style.left = Math.random() * 100 + '%';
+                    sticker.style.animationDelay = Math.random() * 1 + 's';
+                    sticker.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                    heartsExplosion.appendChild(sticker);
+                    
+                    setTimeout(() => {
+                        sticker.remove();
+                    }, 5000);
+                }, i * 200);
+            }
+        }
+
+        // Continuous ambient stickers after opening
+        setInterval(() => {
+            if (isOpened && Math.random() < 0.4) {
+                const ambientStickers = ['💕', '✨', '🌟', '💫'];
+                const sticker = document.createElement('div');
+                sticker.className = 'heart-particle';
+                sticker.innerHTML = ambientStickers[Math.floor(Math.random() * ambientStickers.length)];
+                sticker.style.left = Math.random() * 100 + '%';
+                sticker.style.animationDuration = '4s';
+                heartsExplosion.appendChild(sticker);
+                
+                setTimeout(() => {
+                    sticker.remove();
+                }, 4000);
+            }
+        }, 2000);
+
+        // Initialize floating stickers
+        createFloatingStickers();
+
+        // Add some interactive hover effects to photo cards
+        document.querySelectorAll('.photo-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                const randomStickers = ['💕', '✨', '🌟'];
+                const sticker = document.createElement('div');
+                sticker.className = 'heart-particle';
+                sticker.innerHTML = randomStickers[Math.floor(Math.random() * randomStickers.length)];
+                sticker.style.left = '50%';
+                sticker.style.animationDuration = '2s';
+                heartsExplosion.appendChild(sticker);
+                
+                setTimeout(() => {
+                    sticker.remove();
+                }, 2000);
+            });
+        });
+    </script>
+</html>
